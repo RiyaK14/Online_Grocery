@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&family=Great+Vibes&family=Libre+Baskerville&family=Tektur&display=swap" rel="stylesheet">
+    <title>E-Basket</title>
+    <link rel="icon" type="image/x-icon" href="logo_1.png">
+    <style>
+        .add{
+    background: linear-gradient(180deg, rgb(66, 97, 209), rgb(167, 139, 245));
+    border: none;
+    width:80%;
+    height: 40px;
+    color: #fff;
+    margin-top: 15px;
+  }
+        .head{
+          background: linear-gradient(110deg, rgb(66, 97, 209), rgb(167, 139, 245,0.3));
+        }
+        .name{
+    font-size: 50px;
+    color: #f1f1f1;
+        }
+        .ssout:hover, .cart:hover{
+          transform: scale(1.1,1.1);
+        }
+        .tp{
+          height: 50%;
+          width:40%;
+        }
+        .demo,.cart{
+            height: 70px;
+          width:60px;
+          margin: 20px;
+        }
+        .search{
+            margin-top: 20px;
+            width:200px;
+        }
+        li{
+            margin:0px 50px;
+            font-size: 20px;
+        }
+        #scroll{
+            height: 100%;
+        }
+        .adver{
+width:1000px;
+height:250px;
+}
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .text {font-size: 11px}
+}
+.slideshow-container {
+  max-width: 1000px;
+  margin: auto;
+  margin-top: 20px;
+}
+
+/* Fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 4.9s;
+}
+        </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-ligh head">
+        <a class="navbar-brand" href="#">
+            <img src="logo_1.png" alt="logo" class="logo" width="100" height="100" alt="">
+          </a>
+        <!-- Links -->
+        <ul class="navbar-nav mr-auto" style="width: 80%;">
+          <li class="nav-item">
+            <span class="name" >E-Basket</span>
+          </li>
+          <li class="nav-item">
+            <form class="form-inline my-2 this" action="#">
+                <input class="form-control mr-sm-2 search" type="search" placeholder="🔍Search" id="search" name="search" style="width:100%">
+                </form>
+          </li>
+          <style>
+            .this{
+              position: relative;
+              width:700px;
+              overflow: hidden;
+            }
+            .search{
+              border-radius: 3em;
+            }
+            .name{
+              font-family: 'Bruno Ace SC', cursive;
+font-family: 'Great Vibes', cursive;
+font-family: 'Libre Baskerville', serif;
+font-family: 'Tektur', cursive;
+            }
+          </style>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" action="cart.html">
+            <button class="btn" ><img src="trolley.png" alt="icon3" class="cart"></button>
+          </form>
+          <form class="form-inline my-2 my-lg-0" action="home22.html">
+            <button class="btn " id="sout"><img src="user.png" title="SignOut" alt="SignOut" class="ssout demo"></button>
+          </form>
+        
+      </nav>
+
+      <nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-center">
+        <ul class="navbar-nav">
+          <li class="nav-item " >
+            <a class="nav-link" href="fruits.html">Fruits</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="vege.html">Vegetables</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="hygine.html">Hygine Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="kitchen.html">Home & Kitchen</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="snacks.html">Dairy & Snacks</a>
+          </li>
+        </ul>
+      </nav>
+      <div class="container-fluid">
+        <div class="row">
+
+      <div class="col-sm-3">
+        <img id="scroll" src="scroll1.png" class="rounded">
+      </div>
+      <div class="col-sm-8" style="margin-left: 50px;">
+                    <div class="slideshow-container container-fluid">
+        
+                          <img src="scroll2.png" alt="adver" class="adver mySlides fade img-thumbnail">
+                        
+                          <img src="aafat.png" alt="adver" class="adver mySlides fade img-thumbnail">
+    
+                          <img src="https://st2.depositphotos.com/7341970/11081/v/950/depositphotos_110819108-stock-illustration-grocery-shopping-discount-banner.jpg" alt="adver" class="adver mySlides fade img-thumbnail">
+                                                
+                        </div>
+                        <br>
+                      
+                       <div style="text-align:center">
+                        <span class="dot"></span> 
+                        <span class="dot"></span> 
+                        <span class="dot"></span> 
+                      </div>
+    
+    <script>
+        let slideIndex = 0;
+showSlides();
+
+function showSlides() {
+  let i;
+  let slides = document.getElementsByClassName("mySlides");
+  let dots = document.getElementsByClassName("dot");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}    
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+  setTimeout(showSlides, 5000); // Change image every 5 seconds
+}</script>
+
+
+
+    <br><b><span class="list">Trending deals:</span></b> <br>
+    <div class="row" >
+    <div class="col-sm" style="text-align: center;"><img src="trend1.png" alt="tp" class="img-thumbnail tp"><br><span><b>Basmati Rice(5Kg)</b></span><br><span>Rs. 1175<br></span><button class="btn add"> Add to Cart</button></div>
+    <div class="col-sm" style="text-align: center;"><img src="trend2.png" alt="tp" class="img-thumbnail tp"><br><span><b>Priya Sunflower oil</b></span><br><span>Rs. 142<br></span><button class="btn add"> Add to Cart</button></div>
+    <div class="col-sm" style="text-align: center;"><img src="trend3.png" alt="tp" class="img-thumbnail tp"><br><span><b>Tur Dal(2 Kg)</b></span><br><span>Rs. 234<br></span><button class="btn add"> Add to Cart</button></div>
+    <div class="col-sm" style="text-align: center;"><img src="trend4.png" alt="tp" class="img-thumbnail tp"><br><span><b>Pears soap(5)</b></span><br><span>Rs. 287<br></span><button class="btn add"> Add to Cart</button></div>
+    </div>
+
+
+    <br><b><span class="list">Home Appliances:</span></b> <br>
+        <div class="row">
+    <div class="col-sm" style="text-align: center;"><img src="home1.png" alt="tp" class="img-thumbnail tp"><br><span><b>BPL TV</b></span><br><span>Rs. 12990<br></span><button class="btn add"> Add to Cart</button></div>
+    <div class="col-sm" style="text-align: center;"><img src="home2.png" alt="tp" class="img-thumbnail tp"><br><span><b>5 star single door fridge</b></span><br><span>Rs. 16490<br></span><button class="btn add"> Add to Cart</button></div>
+    <div class="col-sm" style="text-align: center;"><img src="home3.png" alt="tp" class="img-thumbnail tp"><br><span><b>3 star single door fridge</b></span><br><span>Rs. 15990<br></span><button class="btn add"> Add to Cart</button></div>
+    <div class="col-sm" style="text-align: center;"><img src="home4.png" alt="tp" class="img-thumbnail tp"><br><span><b>LG Washing machine</b></span><br><span>Rs. 12490<br></span><button class="btn add"> Add to Cart</button></div>
+</div>
+
+   
+    <br><b><span class="list">Top Picks:</span></b> <br>
+            <div class="row">
+    <div class="col-sm" style="text-align: center;"><img src="pick1.png" alt="tp" class="img-thumbnail tp"><br><span><b>Food wrapping paper</b></span><br><span>Rs. 175<br></span><button class="btn add"> Add to Cart</button></div>
+    <div class="col-sm" style="text-align: center;"><img src="pick1.png" alt="tp" class="img-thumbnail tp"><br><span><b>Garbage bag(10)</b></span><br><span>Rs. 199<br></span><button class="btn add"> Add to Cart</button></div>
+    <div class="col-sm" style="text-align: center;"><img src="pick1.png" alt="tp" class="img-thumbnail tp"><br><span><b>Origami Kitchen Towel(6 pulls)</b></span><br><span>Rs. 297<br></span><button class="btn add"> Add to Cart</button></div>
+    <div class="col-sm" style="text-align: center;"><img src="pick1.png" alt="tp" class="img-thumbnail tp"><br><span><b>Shasyr Laundry liquid(5 litres)</b></span><br><span>Rs. 399<br></span><button class="btn add"> Add to Cart</button></div>
+   </div>
+
+
+</div></div>
+      </div>
+
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-app.js";
+      import { getDatabase, update, ref, get, child } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-database.js";
+      import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-auth.js";
+  
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+    
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyAx1zZlqPSUFyVbH415pGQ_jWujsDClIXE",
+        authDomain: "fir-01-3e7b7.firebaseapp.com",
+        databaseURL: "https://fir-01-3e7b7-default-rtdb.firebaseio.com",
+        projectId: "fir-01-3e7b7",
+        storageBucket: "fir-01-3e7b7.appspot.com",
+        messagingSenderId: "175630940134",
+        appId: "1:175630940134:web:02f2cb005e1c0744d80827",
+        measurementId: "G-RKN8Y6BDQX"
+      };
+    
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth();
+      const database = getDatabase(app);
+  
+      const user = auth.currentUser;
+  
+    onAuthStateChanged(auth,(user)=>{
+  if(user){
+    const uid = user.uid;
+  }
+  else{
+   //user is signed out
+  }
+});
+    
+    sout.addEventListener('click',(e)=>{
+      signOut(auth).then(()=>{
+       //sout success
+       window.location.href="home22.html";
+      }).catch((error)=>{
+        const errorCode = error.code;
+    const errorMessage = error.message;
+    alert(errorMessage);
+      });
+
+    });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+    <script src="script1.js"></script>
+</body>
+
+</html>

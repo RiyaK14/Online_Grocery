@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>E-basket</title>
+  <link rel="icon" type="image/x-icon" href="logo_1.png">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <style>
+    *{
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+    }
+    .header{
+        width: 100%;
+        height: 100vh;
+        background-image: linear-gradient(110deg, rgb(66, 97, 209,0.3), rgb(167, 139, 245, 0.3)), url("trial7.jpg");    
+        clip-path: polygon(100% 0%, 100% 75%, 50% 100%, 0% 75%, 0% 0%);
+        position: relative;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+    }
+    .bg_Part2{
+        width: 100%;
+        height: 100vh;
+        background-image: linear-gradient(110deg, rgb(66, 97, 209,0.3), rgb(167, 139, 245, 0.3)), url("trialbg2.jpg");    
+        text-align: center; 
+        position: relative;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        
+    }
+    .header-section{
+        width: 100%;
+        height: inherit;
+        color: white;
+        text-align: center;
+        position: relative;
+    }
+    .centre-div{
+        width: 100%;
+        height: auto;
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        -ms-transform: translate(-50%,-50%);
+        -webkit-transform: translate(-50%,-50%);
+    }
+    .try{
+        width: 100%;
+        height: auto;
+        position: relative;
+        top: 40%;
+        right: 0%;
+        transform: translate(0%,-20%);
+        -ms-transform: translate(0%,-20%);
+        -webkit-transform: translate(0%,-20%);
+    }
+    #start,#Admin{
+        border: 1px solid #fff;
+        border-radius: 100px;
+        margin:0px 5px;
+        padding: 12px 35px;
+        outline: none;
+        color: #fff;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.4;
+        text-align: center;     
+    }
+    .rhsbuttons{
+      border: 1px solid rgb(120, 120, 230);
+        border-radius: 100px;
+        margin:0px 5px;
+        padding: 12px 35px;
+        outline: none;
+        color: rgb(120, 120, 230);
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.4;
+        text-align: center;  
+    }
+    .rhsbuttons:hover{
+      color: #fff;
+      background: linear-gradient(110deg, rgb(66, 97, 209), rgb(167, 139, 245,0.3));
+      text-decoration: none;
+      box-shadow: 0 0 20px 0 rgb(0,0, 0.0.3);
+    }
+    #start:hover,#Admin:hover{
+      color: rgb(120, 120, 230);
+      background: #fff;
+      text-decoration: none;
+      box-shadow: 0 0 20px 0 rgb(0,0, 0.0.3);
+    }
+    .imgcontainer {
+  margin: 24px 0 12px 0;
+  position: fixed;
+  top: 2%;
+  left: 2%;
+}
+
+img.avatar {
+  width: 25%;
+  height: 25%;
+  background-color: rgb(213, 245, 249);
+  border-radius: 50%;
+}
+  </style>
+</head>
+<body>
+<div class="container-fluid header" id="topheader">
+  <div class="imgcontainer">
+    <img src="logo_1.png" alt="Avatar" class="avatar">
+  </div>
+  <section class="header-section">
+    <div class="centre-div">
+    <h1>WELCOME TO E-BASKET</h1><br>
+    <div class="header-buttons"><a href="#" id="start">Get Started</a>
+   <a href="#" id="Admin">Admin</a></div>
+  </div>
+  </section>
+</div>
+
+<!--js-->
+<script type="module">
+  //-------------------------------------------------------------------firebase---------------------------------------------------
+     // Import the functions you need from the SDKs you need
+     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-app.js";
+    import { getDatabase, update, ref, get, child,set } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-database.js";
+    import { getAuth, sendPasswordResetEmail,confirmPasswordReset, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithRedirect, getRedirectResult } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-auth.js";
+
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    /*const firebaseConfig = {
+      ****************************************************
+    };*/
+    
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth();
+    const provider = new GoogleAuthProvider(app);
+    const database = getDatabase(app);
+
+   
+
+
+start.addEventListener('click',function(event){
+  const element=document.querySelector('.header');
+  element.innerHTML="";
+  element.style.clipPath='none';
+  element.style.background='none';
+  const html=`<div class="row" style="text-align:center;">
+    <div class="col bg_Part2" ><div class="try container "><h1 style="color:white;">Welcome to E-basket</h1></div></div>
+    <div class="col signin" >
+
+      <div class="try container ">
+        <div class="container">
+  <form action="#" class="form-group">
+        <input type="text" class="form-control" id="eid" placeholder="Enter email" name="email" required><br>
+        <input type="password" class="form-control" placeholder="Enter password" name="pswd" id="password" required><br><br>
+        <div class="header-buttons"><a href="#" class="btn rhsbuttons login" id="login">Sign in</a>
+        <a href="#" class="btn rhsbuttons nextbtn" id="nextbtn">New at E-Basket?</a>
+        <a href="#" class="btn rhsbuttons reset" id="reset">forgot password?</a></div>
+        <br>
+        <span style="font-size:20px; color:rgb(120, 120, 230);">OR</span><br><br>
+        <div class="header-buttons"><a href="#" class="btn rhsbuttons login" id="googlebtn">Sign in with Google</a></div>
+  </form>
+  </div>
+</div>
+`
+  element.innerHTML=html;
+
+
+  googlebtn.addEventListener('click',function(event){
+      signInWithRedirect(auth, provider);
+      console.log("hi");
+      getRedirectResult(auth)
+  .then((result) => {
+    console.log("hi");
+    // This gives you a Google Access Token. You can use it to access Google APIs.
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+    
+    // The signed-in user info.
+    const user = result.user;
+    window.location.href="home.html"
+    // IdP data available using getAdditionalUserInfo(result)
+    // ...
+  }).catch((error) => {
+    // Handle Errors here.
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // The email of the user's account used.
+    const email = error.customData.email;
+    // The AuthCredential type that was used.
+    const credential = GoogleAuthProvider.credentialFromError(error);
+    // ...
+  });
+    });
+
+    
+
+  nextbtn.addEventListener("click",function(e) {
+    var elem=document.querySelector('.rhs');  
+  elem.innerHTML="";
+  var code=`<form action="#" class="form-group">
+        <input type="text" class="form-control" id="newuser" placeholder="Enter your name" name="newuser" required><br>
+        <input type="text" class="form-control" id="eid" placeholder="Enter email" name="eid" required><br>
+        <input type="password" class="form-control" placeholder="Enter password" name="pswd" id="password" required><br>
+        <input type="password" class="form-control" placeholder="Confirm password" name="confirm" id="confirm" required><br><br>
+        <div class="header-buttons"><a href="#" class="rhsbuttons login" id="sign">Sign-Up</a></div>
+  </form>`;
+  elem.innerHTML=code;
+   
+
+  var i=0;
+  sign.addEventListener("click",function(e){
+    var email=document.getElementById('eid').value;
+    var password=document.getElementById('password').value;
+    var conpass=document.getElementById('confirm').value;
+    var username=document.getElementById('newuser').value;
+
+    if(email && password && username){
+
+    if(password==conpass){
+      createUserWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    ++i;
+    const user = userCredential.user;
+    set(ref(database, 'users/' + user.uid), {
+    email: email,
+    password : password
+    })
+    .then(() => {
+      window.location.href="home.html";
+  // Data saved successfully!
+     })
+     .catch((error) => {
+  // The write failed...
+  alert(error);
+});
+
+      // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    alert(errorMessage);
+    // ..
+  });}
+  else{
+    alert( "Password and Confirm Password does not match");
+  }}
+  else{
+    alert("Enter valid username, password or email id");
+  }
+    //...............................................................
+    
+  });
+});
+
+
+//...............
+login.addEventListener('click',(e)=>{
+
+  const dbref = ref(database);
+  var email=document.getElementById('eid').value;
+  var password=document.getElementById('password').value;
+
+ //..........
+  signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential)=>{
+    const user = userCredential.user;
+
+    const dt = new Date();
+    update(ref(database, 'users/' + user.uid), {
+    last_login: dt,
+    
+    })
+    window.location.href="home.html";
+  })
+  .catch((error)=>{
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    alert(errorMessage);
+  });
+});
+  //..........
+  
+    reset.addEventListener('click',(e)=>{
+      
+      const email=document.getElementById('eid').value;
+      
+      sendPasswordResetEmail(auth, email)
+  .then(() => {
+    alert("Password reset email sent!");
+    // Password reset email sent!
+    // ..
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    alert(errorMessage);
+    // ..
+  });
+    });
+    });
+//...............................................................................................
+
+Admin.addEventListener('click',function(event){
+  const element=document.querySelector('.header');
+  element.innerHTML="";
+  element.style.clipPath='none';
+  element.style.background='none';
+  const html=`<div class="row" style="text-align:center;">
+    <div class="col bg_Part2" ><div class="try container "><h1 style="color:white;">Admin Login</h1></div></div>
+    <div class="col signin" >
+
+      <div class="try container ">
+  <form action="#" class="form-group">
+        <input type="text" class="form-control" id="username" placeholder="Enter name" required><br>
+        <input type="password" class="form-control" placeholder="Enter password" name="pswd" id="password" required><br><br>
+        <div class="header-buttons"><a href="#" class="btn rhsbuttons login" id="ad_page">login</a>
+        </div>
+  </form>
+</div>
+`
+  element.innerHTML=html;
+
+  ad_page.addEventListener('click',function(e){
+       var ad_name=document.getElementById("username").value;
+       var pass=document.getElementById("password").value;
+       if(ad_name=="Admin22"&&pass=="Admin2023"){
+        window.location.href="admin.html";
+       }
+       else{
+        alert("Check your password or name")
+       }
+  });
+});
+
+</script>
+
+<!--bootstrap cdn-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

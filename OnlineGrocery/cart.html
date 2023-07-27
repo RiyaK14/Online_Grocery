@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Basket</title>
+    <link rel="icon" type="image/x-icon" href="logo_1.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <style>
+    .head{
+      background: linear-gradient(110deg, rgb(66, 97, 209), rgb(167, 139, 245,0.3));
+    }
+    .name{
+      font-size: 50px;
+      color: #fff;
+    }
+    thead{
+      background-color: rgb(199, 130, 214);
+    }
+    .inp{
+      flex-wrap: wrap;
+      width:70px;
+      height:35px;
+      margin-top: 8px;
+      border: 1.5px solid rgb(182, 181, 181);
+      border-radius: 4px;
+    }
+    .inp:focus{
+      border: 2.5px solid rgb(177, 222, 255);
+      outline: 0.5px solid rgb(56, 169, 251);
+    }
+    .container-fluid{
+    overflow-x: scroll;
+    }
+    #pay{
+      border: 1px solid rgb(120, 120, 230);
+        border-radius: 100px;
+        margin:0px 5px;
+        padding: 12px 35px;
+        outline: none;
+        color: rgb(120, 120, 230);
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.4;
+        text-align: center;  
+    }
+    #pay:hover{
+      color: #fff;
+      background: linear-gradient(110deg, rgb(66, 97, 209), rgb(167, 139, 245,0.3));
+      text-decoration: none;
+      box-shadow: 0 0 20px 0 rgb(0,0, 0.0.3);
+    }
+    .cart{
+      width: 30%;
+      font-size: large;
+      border-top: solid 2px rgb(120, 120, 230);
+      margin-left: 50%;
+    }
+    td{
+      text-align: center;
+  vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+    
+<script type = "text/javascript" src="script2.js"></script>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-ligh head">
+  <a class="navbar-brand" href="#">
+      <img src="logo_1.png" alt="logo" class="logo" width="70" height="80" alt="">
+    </a>
+  <!-- Links -->
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item">
+      <span class="name" >Admin Page</span>
+    </li>
+  </ul>
+    <form class="form-inline my-2 my-lg-0" action="home.html">
+      <button class="btn "><img src="icons8-home-page-100.png" title="Home" alt="home" class="home"></button>
+    </form>
+  
+</nav>
+<div class="container-fluid ">
+<table class="table text-center">
+  <thead>
+    <tr>
+      <th>Sr. No</th>
+      <th>Product</th>
+      <th></th>
+      <th></th>
+      <th>Quantity</th>
+    </tr>
+  </thead>
+  <tbody id="tbody1">
+    <!--items will come here-->
+  </tbody>
+</table>
+<div class="total-price">
+  <table class="cart">
+      <tr>
+          <td class="tptab" >Subtotal</td>
+          <td class="tptab" id="subtotal">Rs. 0.00</td>
+      </tr>
+      <tr>
+          <td class="tptab">Tax</td>
+          <td class="tptab" id="tax">Rs. 0.00</td>
+      </tr>
+      <tr>
+          <td class="tptab">Total</td>
+          <td class="tptab" id="cart-total">Rs. 0.00</td>
+      </tr>
+      <tr>       
+        <td colspan="2"><button class="btn" id="pay">Proceed</button></td>
+      </tr>
+  </table><br>
+  
+
+
+<script type="module">
+    
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-analytics.js";
+    import { getDatabase, ref, child, get, remove, onValue, update} from "https://www.gstatic.com/firebasejs/9.18.0/firebase-database.js";
+
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+   /* const firebaseConfig = {
+      
+    };*/
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    var num=[];
+    var pri=[];
+    const db = getDatabase();
+
+  const j=[];
+
+var i=0,data,pais;
+var tbody = document.getElementById('tbody1');
+var paisa=0;
+
+function AddToTbl(pname,img,price,cid){
+ 
+
+  //Product database to check whether product is available or not
+  const starCountRef = ref(db, 'Product/' + pname);
+
+onValue(starCountRef, (snapshot) => {
+  data = snapshot.val();
+  //console.log(data);
+  j.push(data);
+//console.log(j);
+
+//cart items
+let trow=document.createElement("tr");
+   let td1=document.createElement('td');
+   let td2=document.createElement('td');
+   let td3=document.createElement('td');
+   let td4=document.createElement('td');
+   let td5=document.createElement('td');
+   let br=document.createElement('br');
+
+  //console.log(img);
+   
+   td1.innerHTML=++i;
+   td2.innerHTML=`<img src="${img}" style="height:150px;">`;
+   td3.innerHTML=pname+`<br>`+`<p>`+price+`</p>`;
+   //console.log(img);
+   
+   if(Number(data)==0){
+    td4.innerHTML=`<h3 style="color:red;">Out of stock</h3>`;
+    td5.innerHTML=`<button class="btn btn-outline-danger remove">Remove</button>`;
+   pais=0;
+   }
+   else{
+    td4.innerHTML=`<input type="number" value="1" class="quantity" name="quantity" min="1" max="${data}">`;
+    td5.innerHTML=`<button class="btn btn-outline-danger remove">Remove</button>`;
+   pais=Number(price.slice(3,20));
+   }
+   num.push(td4.children[0].value);
+   pri.push(pais);
+
+   trow.appendChild(td1);
+   trow.appendChild(td2);
+   trow.appendChild(td3);
+   trow.appendChild(td4);
+   trow.appendChild(td5);
+
+   tbody.appendChild(trow);
+   tbody.appendChild(br);
+   moveToatals();
+
+    const quan=document.querySelectorAll(".quantity");
+   quan.forEach(function(btn){
+    btn.addEventListener("click", function(event){
+      const quant = event.target.value; 
+      //console.log(quant);
+      const srno=event.target.parentElement.parentElement.children[0].textContent;
+      const price=event.target.parentElement.parentElement.children[2].children[1].textContent;
+      var pisa=Number(price.slice(3,20));
+      if(num[srno-1]>quant){
+      paisa=quant*pisa;
+    pri[srno-1]=paisa;
+      num[srno-1]=quant;
+   moveToatals();}
+   else if(num[srno-1]<quant){
+    paisa=quant*pisa;
+    pri[srno-1]=paisa;
+    num[srno-1]=quant;
+   moveToatals();
+   }
+    });
+   });
+
+   const removwwe = document.querySelectorAll(".remove");
+   removwwe.forEach(function(btn){
+    btn.addEventListener("click", function(event){
+      const no=Number(event.target.parentElement.parentElement.children[0].textContent);
+
+       remove(ref(db, 'Cart/'+cid[no-1]))
+        .then(()=>{
+
+          window.location.href="cart.html";
+        })
+        .catch((error)=>{
+          //alert(error);
+        });});
+    }); 
+});
+
+ 
+}
+
+
+
+  function AddAllToTbl(array,array2){
+   
+   tbody.innerHTML="";
+   array.forEach((element)=>{
+      AddToTbl(element.name,element.img,element.price,array2);
+   });
+  }
+
+function getAlldata(){
+   const dbref = ref(db);
+   get(child(dbref,"Cart"))
+   .then((snapshot)=>{
+     var produ=[];
+     snapshot.forEach(childSnapshot => {
+      produ.push(childSnapshot.val());
+     });
+     AddAllToTbl(produ,Object.keys(snapshot.val()));
+   });
+}
+
+function moveToatals(){
+  let sum = 0; 
+        for (let i = 0; i < pri.length; i++) 
+           { sum += pri[i];
+          //console.log(pri);
+        }
+const tax= sum*0.01;
+const totalMoney=sum+tax;
+document.getElementById("cart-total").textContent="Rs. "+totalMoney;
+document.getElementById("subtotal").textContent="Rs. "+sum;
+document.getElementById("tax").textContent="Rs. "+tax;
+};
+
+pay.addEventListener('click',function(event){
+  if(document.getElementById("subtotal").textContent != "Rs. 0.00"){
+  alert("Your order has been placed successfully!!!!");}
+  else{
+  alert("Please add something to your cart before placing an order");
+  }
+});
+
+window.onload=getAlldata();
+  </script>
+<!--bootstrap cnd-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+</body>
+</html>
